@@ -47,6 +47,16 @@ var renderEngine = (function (container, network, battlegroundState) {
         return position;
     }
 
+    function isOutsideGround(x, y) {
+        if (x > maxX) {
+            return true;
+        }
+        if (y > maxY) {
+            return true;
+        }
+        return false;
+    }
+
     function recalculateTankState(tank, battlegroundState) {
         var newDirection = tank.direction + getDirectionOffset(tank.turningDirection, tank.turningSpeed, tank.isTurning);
         var newTop = capY(tank.top + getTopOffset(newDirection, tank.drivingSpeed));
@@ -60,8 +70,9 @@ var renderEngine = (function (container, network, battlegroundState) {
     }
 
     function recalculateBulletState(bullet) {
-        bullet.top = capY(bullet.top + getTopOffset(bullet.direction, bullet.speed));
-        bullet.left = capX(bullet.left + getLeftOffset(bullet.direction, bullet.speed));
+        bullet.top = bullet.top + getTopOffset(bullet.direction, bullet.speed);
+        bullet.left = bullet.left + getLeftOffset(bullet.direction, bullet.speed);
+        return isOutsideGround(bullet.left, bullet.top);
     }
 
     function renderEngine() {
@@ -69,8 +80,13 @@ var renderEngine = (function (container, network, battlegroundState) {
             recalculateTankState(battlegroundState.tanks[i], battlegroundState);
         }
         for (var j = 0; j < battlegroundState.bullets.length; ++j) {
-            recalculateBulletState(battlegroundState.bullets[j]);
+            var isOutsideGround = recalculateBulletState(battlegroundState.bullets[j]);
+            if (isOutsideGround) {
+                battlegroundState.bullets.splice(j, 1);
+            }
         }
+        // TODO nog niet alle kogels verdwijnen (als je er veel schiet)
+        console.log('#bullets: ' + battlegroundState.bullets.length);
 
         battleground.setState(battlegroundState);
         network.tankChange(battlegroundState.tanks[0]);
