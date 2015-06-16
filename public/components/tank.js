@@ -1,7 +1,8 @@
 
 var Tank = React.createClass({
     getInitialState: function () {
-        return {left: 0, top: 0, direction: 0};
+        var tankInitialState = gamestate.tanks[this.props.tankindex].initialState;
+        return {left: tankInitialState.left, top: tankInitialState.top, direction: tankInitialState.direction};
     },
     render: function () {
         return (
@@ -17,11 +18,11 @@ var Tank = React.createClass({
 });
 
 var tank = React.render(
-    <Tank />,
+    <Tank tankindex="0" />,
     document.getElementById('playerTank')
 );
 
 var opponentTank = React.render(
-    <Tank />,
+    <Tank tankindex="1" />,
     document.getElementById('opponentTank')
 );
