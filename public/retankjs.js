@@ -15,10 +15,6 @@ var Tank = React.createClass({
     }
 });
 
-var gamestate = {
-    name: 'tankular'
-};
-
 var gamestate = {};
 
 var keypress = Rx.Observable
@@ -53,7 +49,6 @@ Rx.Observable
         }
     })
     .subscribe(function(e) {
-        console.log(gamestate.name);
         console.log(e.data.direction);
     });
 
