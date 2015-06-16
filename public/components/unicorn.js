@@ -1,7 +1,7 @@
 var Unicorn = React.createClass({
     render: function () {
         return (
-            <img src="images/unicorn.jpg"
+            <img src="images/unicorn.png"
             style={{
                 position: 'absolute',
                 top: this.props.top,
@@ -17,8 +17,7 @@ var horsySound = new Audio("sound/horse.mp3");
 
 function createUnicorn(unicorn) {
     var div = document.createElement('div');
-    document.body.appendChild(div);
     React.render(<Unicorn left={unicorn.x} top={unicorn.y} />, div);
-    gamestate.unicorns.push(unicorn);
     horsySound.play();
+    return div;
 }
