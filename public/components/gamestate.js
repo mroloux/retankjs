@@ -10,7 +10,7 @@ var gamestate = {
             initialState: {
                 top: 0,
                 left: 0,
-                direction: 70
+                direction: 110
             }
         },
         {
@@ -19,9 +19,9 @@ var gamestate = {
             turningSpeed: 5,
             drivingSpeed: 2,
             initialState: {
-                top: 400,
-                left: 400,
-                direction: 250
+                top: 500,
+                left: 750,
+                direction: 290
             }
         }
     ],
