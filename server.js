@@ -14,6 +14,10 @@ io.on('connection', function (socket) {
     socket.on('updatetank', function (tank) {
         socket.broadcast.emit('updatetank', tank);
     });
+
+    socket.on('bulletShot', function (bullet) {
+        socket.broadcast.emit('bulletShot', bullet);
+    });
 });
 
 function scheduleUnicorn() {

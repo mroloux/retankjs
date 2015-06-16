@@ -1,3 +1,4 @@
+var KEY_SPACE = 32;
 var KEY_LEFT = 37;
 var KEY_RIGHT = 39;
 
@@ -10,11 +11,22 @@ network.onCreateUnicorn(function(unicorn) {
     horsySound.play();
 });
 
+network.onBulletShot(function(bullet) {
+    battlegroundState.bullets.push(bullet);
+    bulletSound.play();
+});
+
 function createTurningEvent(isTurning, turningDirection) {
     return {
         'eventType': 'turning',
         'isTurning': isTurning,
         'turningDirection': turningDirection
+    };
+}
+
+function createBulletEvent() {
+    return {
+        'eventType': 'bullet'
     };
 }
 
@@ -28,6 +40,7 @@ Rx.Observable
         switch(event.which) {
             case KEY_LEFT: return createTurningEvent(true, 'left');
             case KEY_RIGHT: return createTurningEvent(true, 'right');
+            case KEY_SPACE: return createBulletEvent();
         }
     })
     .subscribe(gameEngine);

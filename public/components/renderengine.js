@@ -47,7 +47,7 @@ var renderEngine = (function (container, network, battlegroundState) {
         return position;
     }
 
-    function recalculateState(tank, battlegroundState) {
+    function recalculateTankState(tank, battlegroundState) {
         var newDirection = tank.direction + getDirectionOffset(tank.turningDirection, tank.turningSpeed, tank.isTurning);
         var newTop = capY(tank.top + getTopOffset(newDirection, tank.drivingSpeed));
         var newLeft = capX(tank.left + getLeftOffset(newDirection, tank.drivingSpeed));
@@ -59,10 +59,19 @@ var renderEngine = (function (container, network, battlegroundState) {
         tank.direction = newDirection;
     }
 
+    function recalculateBulletState(bullet) {
+        bullet.top = capY(bullet.top + getTopOffset(bullet.direction, bullet.speed));
+        bullet.left = capX(bullet.left + getLeftOffset(bullet.direction, bullet.speed));
+    }
+
     function renderEngine() {
         for(var i = 0; i < battlegroundState.tanks.length; ++i) {
-            recalculateState(battlegroundState.tanks[i], battlegroundState);
+            recalculateTankState(battlegroundState.tanks[i], battlegroundState);
         }
+        for (var j = 0; j < battlegroundState.bullets.length; ++j) {
+            recalculateBulletState(battlegroundState.bullets[j]);
+        }
+
         battleground.setState(battlegroundState);
         network.tankChange(battlegroundState.tanks[0]);
     }

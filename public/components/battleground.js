@@ -29,7 +29,8 @@ var battlegroundState = {
     },
     collides: function(object, top, left, width, height) {
 
-    }
+    },
+    bullets: []
 };
 
 var Battleground = React.createClass({
@@ -44,6 +45,9 @@ var Battleground = React.createClass({
             })}
             {this.state.unicorns.map(function (state) {
                 return <UnicornComponent state={state} />
+            })}
+            {this.state.bullets.map(function (state) {
+                return <BulletComponent state={state} />
             })}
             </div>
             );
