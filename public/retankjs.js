@@ -33,7 +33,9 @@ var keypress = Rx.Observable
 
 var handlers = {
     dispatch: function (gs, e) {
-        return this['_' + e.event](gs, e.data);
+        if (e) {
+            return this['_' + e.event](gs, e.data);
+        }
     },
 
     _tick: function (gs) {
