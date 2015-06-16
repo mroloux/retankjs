@@ -2,7 +2,7 @@ var KEY_LEFT = 37;
 var KEY_RIGHT = 39;
 
 network.onTankChange(function(tank) {
-    gamestate.updateTank(tank);
+    battlegroundState.updateTank(tank);
 });
 
 network.onCreateUnicorn(function(unicorn) {

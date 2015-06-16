@@ -1,12 +1,11 @@
-var gameEngine = (function (network) {
+var gameEngine = (function (battlegroundState) {
 
     function gameEngine(event) {
         if (typeof(event) != 'undefined') {
-            gamestate.tanks[0].isTurning = event.isTurning;
-            gamestate.tanks[0].turningDirection = event.turningDirection;
-            network.tankChange(gamestate.tanks[0]);
+            battlegroundState.tanks[0].isTurning = event.isTurning;
+            battlegroundState.tanks[0].turningDirection = event.turningDirection;
         }
     }
 
     return gameEngine;
-})(network);
+})(battlegroundState);
