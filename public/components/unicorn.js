@@ -13,11 +13,12 @@ var Unicorn = React.createClass({
     }
 });
 
+var horsySound = new Audio("sound/horse.mp3");
+
 function createUnicorn(unicorn) {
     var div = document.createElement('div');
     document.body.appendChild(div);
     React.render(<Unicorn left={unicorn.x} top={unicorn.y} />, div);
     gamestate.unicorns.push(unicorn);
-    var snd = new Audio("sound/horse.mp3");
-    snd.play();
+    horsySound.play();
 }
