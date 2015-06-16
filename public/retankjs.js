@@ -16,11 +16,16 @@ var gamestate = {
     updateTank: function(updatedTank) {
         var tankToUpdate = this.tanks.filter(function(tank) {
             return tank.id === updatedTank.id;
-        });
-
-        for (var prop in updatedTank) {
-            tankToUpdate[prop] = updatedTank[prop];
+        })[0];
+        if (!tankToUpdate) {
+            tankToUpdate = updatedTank;
+            this.tanks.push(tankToUpdate);
+        } else {
+            for (var prop in updatedTank) {
+                tankToUpdate[prop] = updatedTank[prop];
+            }
         }
+
     }
 };
 network.onTankChange(function(tank) {
