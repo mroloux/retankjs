@@ -6,7 +6,7 @@ var Tank = React.createClass({
         return (
             <img src="images/tank.png"
                  style={{
-                position: 'absolute',
+                position: 'relative',
                 top: this.state.top,
                 left: this.state.left,
                 transform: 'rotate(' + this.state.direction + 'deg)'

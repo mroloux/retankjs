@@ -1,7 +1,8 @@
-var renderEngine = (function(container) {
+var renderEngine = (function (container) {
 
     var maxX = container.offsetWidth;
     var maxY = container.offsetHeight;
+    var tankWidth = 70;
 
     function getTopOffset(direction, speed) {
         if (direction === 0) {
@@ -24,20 +25,20 @@ var renderEngine = (function(container) {
     }
 
     function capY(position) {
-        if(position > maxY) {
+        if (position > maxY) {
             return 0;
         }
-        if(position < 0) {
+        if (position + tankWidth < 0) {
             return maxY;
         }
         return position;
     }
 
     function capX(position) {
-        if(position > maxX) {
+        if (position > maxX) {
             return 0;
         }
-        if(position < 0) {
+        if (position + tankWidth < 0) {
             return maxX;
         }
         return position;
