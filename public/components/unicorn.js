@@ -1,7 +1,7 @@
 var Unicorn = React.createClass({
     render: function () {
         return (
-            <img src="images/unicorn.jpg"
+            <img src="images/unicorn.png"
             style={{
                 position: 'absolute',
                 top: this.props.top,

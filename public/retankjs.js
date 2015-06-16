@@ -44,6 +44,7 @@ var gamestate = {
 
     }
 };
+
 network.onTankChange(function(tank) {
     gamestate.updateTank(tank);
 });
