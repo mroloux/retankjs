@@ -58,8 +58,11 @@ var renderEngine = (function (container) {
     function renderEngine() {
         var newState = calculateNewState(tank.state, gamestate.tanks[0]);
         tank.setState({left: newState.left, top: newState.top, direction: newState.direction});
+
+        var opponentNewState = calculateNewState(opponentTank.state, gamestate.tanks[1]);
+        opponentTank.setState({left: opponentNewState.left, top: opponentNewState.top, direction: opponentNewState.direction});
     }
 
     return renderEngine;
-})(document.getElementById('tank'));
+})(document.getElementById('battleground'));
 

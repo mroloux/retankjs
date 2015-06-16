@@ -1,11 +1,10 @@
-
-var Tank = React.createClass({
+var Bullet = React.createClass({
     getInitialState: function () {
         return {left: 0, top: 0, direction: 0};
     },
     render: function () {
         return (
-            <img src="images/tank.png"
+            <img src="images/bullet.png"
                  style={{
                 position: 'relative',
                 top: this.state.top,
@@ -16,12 +15,7 @@ var Tank = React.createClass({
     }
 });
 
-var tank = React.render(
-    <Tank />,
-    document.getElementById('playerTank')
-);
-
-var opponentTank = React.render(
-    <Tank />,
-    document.getElementById('opponentTank')
+var bullet = React.render(
+    <Bullet />,
+    document.getElementById('bullet')
 );
