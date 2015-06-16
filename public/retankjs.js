@@ -1,6 +1,6 @@
 var Tank = React.createClass({
     getInitialState: function () {
-        return {left: 0, top: 0};
+        return {left: 0, top: 0, direction: 0};
     },
     render: function () {
         return (
@@ -8,7 +8,8 @@ var Tank = React.createClass({
             style={{
                 position: 'absolute',
                 top: this.state.top,
-                left: this.state.left
+                left: this.state.left,
+                transform: 'rotate(' + this.state.direction + 'deg)'
             }} />
             );
     }
@@ -42,8 +43,8 @@ var handlers = {
         return gs;
     },
 
-    _directionchange: function (gs, event) {
-        console.log(event.direction);
+    _directionchange: function (gs, eventData) {
+        console.log(eventData.direction);
         return gs;
     }
 };
@@ -62,5 +63,5 @@ Rx.Observable
     .subscribe(render);
 
 function render() {
-    tank.setState({left: Math.random() * 950, top: Math.random() * 700});
+    tank.setState({left: Math.random() * 950, top: Math.random() * 700, direction: Math.random() * 360});
 }
