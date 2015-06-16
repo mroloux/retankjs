@@ -1,4 +1,7 @@
-var renderEngine = (function() {
+var renderEngine = (function(container) {
+
+    var maxX = container.offsetWidth;
+    var maxY = container.offsetHeight;
 
     function getTopOffset(direction, speed) {
         if (direction === 0) {
@@ -20,10 +23,30 @@ var renderEngine = (function() {
         return 0;
     }
 
+    function capY(position) {
+        if(position > maxY) {
+            return 0;
+        }
+        if(position < 0) {
+            return maxY;
+        }
+        return position;
+    }
+
+    function capX(position) {
+        if(position > maxX) {
+            return 0;
+        }
+        if(position < 0) {
+            return maxX;
+        }
+        return position;
+    }
+
     function calculateNewPosition(currentTankState, newDirection, newSpeed) {
         return {
-            top: currentTankState.top + getTopOffset(newDirection, newSpeed),
-            left: currentTankState.left + getLeftOffset(newDirection, newSpeed)
+            top: capY(currentTankState.top + getTopOffset(newDirection, newSpeed)),
+            left: capX(currentTankState.left + getLeftOffset(newDirection, newSpeed))
         };
     }
 
@@ -33,5 +56,5 @@ var renderEngine = (function() {
     }
 
     return renderEngine;
-})();
+})(document.getElementById('tank'));
 
