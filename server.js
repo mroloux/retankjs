@@ -12,7 +12,7 @@ io.on('connection', function (socket) {
     });
 
     socket.on('updatetank', function (tank) {
-        io.sockets.broadcast.emit('updatetank', tank);
+        socket.broadcast.emit('updatetank', tank);
     });
 });
 
