@@ -1,8 +1,14 @@
 var TankGame = React.createClass({
+    getInitialState: function () {
+        return {left: 0, top: 0};
+    },
     render: function () {
         return (
-            <img src="images/tank.png" style={{
-                position: 'absolute'
+            <img src="images/tank.png"
+            style={{
+                position: 'absolute',
+                top: this.state.top,
+                left: this.state.left
             }} />
             );
     }
@@ -14,15 +20,11 @@ var tick = function () {
 
 var gamestate = {};
 
-
 var keypress = Rx.Observable
     .fromEvent(document, 'keyup')
     .map(function (e) {
-        //if(e.which === keys.enter)
-        console.log(e.which);
         return { event: 'turnleft' };
     });
-
 
 var handlers = {
     dispatch: function (gs, e) {
@@ -38,18 +40,19 @@ var handlers = {
     }
 };
 
+var tankGame = React.render(
+    <TankGame />,
+    document.getElementById('tankGame')
+);
+
 Rx.Observable
-    .interval(1000)
+    .interval(500)
     .map(tick)
     .startWith(gamestate)
     .merge(keypress)
     .scan(handlers.dispatch.bind(handlers))
     .subscribe(render);
 
-
 function render() {
-    React.render(
-        <TankGame />,
-        document.getElementById('tankGame')
-    );
+    tankGame.setState({left: Math.random() * 1000, top: Math.random() * 300});
 }
