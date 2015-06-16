@@ -5,7 +5,8 @@ var gamestate = {
             direction: 0,
             speed: 2
         }
-    ]
+    ],
+    unicorns: []
 };
 
 Rx.Observable

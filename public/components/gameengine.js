@@ -1,7 +1,9 @@
-var gameEngine = (function() {
+var gameEngine = (function () {
 
     function gameEngine(e) {
-        gamestate.tanks[0].direction = e.direction;
+        if (e) {
+            gamestate.tanks[0].direction = e.direction;
+        }
     }
 
     return gameEngine;
