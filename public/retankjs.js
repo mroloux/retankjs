@@ -9,7 +9,7 @@ var gamestate = {
 };
 
 Rx.Observable
-    .interval(100)
+    .interval(100/6)
     .subscribe(renderEngine);
 
 Rx.Observable
