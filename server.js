@@ -13,9 +13,14 @@ io.on('connection', function (socket) {
         });
 });
 
-setInterval(function() {
-    io.sockets.emit('unicornCreated', { x: Math.random() * 950, y: Math.random() * 700});
-}, 1000);
+function scheduleUnicorn() {
+    setTimeout(function() {
+        io.sockets.emit('unicornCreated', { x: Math.random() * 950, y: Math.random() * 700});
+        scheduleUnicorn();
+    }, Math.random() * 20000);
+}
+
+scheduleUnicorn();
 
 http.listen(3000, function () {
     console.log('listening on *:3000');
