@@ -3,7 +3,7 @@ var network = (function () {
     var listeners = [];
 
     socket.on('unicornCreated', function (unicorn) {
-        gamestate.unicorns.push(unicorn);
+        createUnicorn(unicorn);
     });
 
     socket.on('updatetank', function (tank) {
