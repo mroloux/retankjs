@@ -5,7 +5,7 @@ var network = (function () {
 
     socket.on('unicornCreated', function (unicorn) {
         createUnicornListeners.forEach(function(listener) {
-            listener(tank);
+            listener(unicorn);
         });
     });
 
