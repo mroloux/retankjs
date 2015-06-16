@@ -6,13 +6,14 @@ var io = require('socket.io')(http);
 
 app.use('/', express.static(path.join(__dirname, 'public')));
 
-io.on('connection', function(socket){
+io.on('connection', function (socket) {
     console.log('a user connected');
-    socket.on('disconnect', function() {
-       console.log("disconnect :-(");
-    });
+    socket
+        .on('disconnect', function () {
+            console.log("disconnect :-(");
+        });
 });
 
-http.listen(3000, function(){
+http.listen(3000, function () {
     console.log('listening on *:3000');
 });
