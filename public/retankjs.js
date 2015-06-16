@@ -60,5 +60,5 @@ Rx.Observable
     .subscribe(render);
 
 function render() {
-    tank.setState({left: Math.random() * 1000, top: Math.random() * 300});
+    tank.setState({left: Math.random() * 950, top: Math.random() * 700});
 }
