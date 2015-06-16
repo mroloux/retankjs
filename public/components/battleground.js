@@ -62,13 +62,9 @@ var Player = React.createClass({
         this.state.name = event.target.value;
     },
     render: function() {
-        var valueLink = {
-            value: this.state.name,
-            requestChange: this.handleChange
-        };
         return <div class="playername">
             <label for="playerName">Player name</label>
-            <input type="text" valueLink={valueLink} />
+            <input type="text" onChange={this.handleChange} />
         </div>;
     }
 });
