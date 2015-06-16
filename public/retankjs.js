@@ -1,4 +1,4 @@
-var TankGame = React.createClass({
+var Tank = React.createClass({
     getInitialState: function () {
         return {left: 0, top: 0};
     },
@@ -45,9 +45,9 @@ var handlers = {
     }
 };
 
-var tankGame = React.render(
-    <TankGame />,
-    document.getElementById('tankGame')
+var tank = React.render(
+    <Tank />,
+    document.getElementById('tank')
 );
 
 Rx.Observable
@@ -59,5 +59,5 @@ Rx.Observable
     .subscribe(render);
 
 function render() {
-    tankGame.setState({left: Math.random() * 1000, top: Math.random() * 300});
+    tank.setState({left: Math.random() * 1000, top: Math.random() * 300});
 }
