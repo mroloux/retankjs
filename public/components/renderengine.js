@@ -4,24 +4,26 @@ var renderEngine = (function (container) {
     var maxY = container.offsetHeight;
     var tankWidth = 70;
 
-    function getTopOffset(direction, speed) {
-        if (direction === 0) {
-            return speed * -1;
-        }
-        if (direction === 180) {
-            return speed;
-        }
-        return 0;
+    function toRadians(angle) {
+      return angle * (Math.PI / 180);
     }
 
-    function getLeftOffset(direction, speed) {
-        if (direction === 270) {
-            return speed * -1;
+    function getTopOffset(directionDegrees, speed) {
+        return -1 * Math.cos(toRadians(directionDegrees)) * speed;
+    }
+
+    function getLeftOffset(directionDegrees, speed) {
+        return Math.sin(toRadians(directionDegrees)) * speed;
+    }
+
+    function getDirectionOffset(turningDirection, turningSpeed, isTurning) {
+        if (!isTurning) {
+            return 0;
         }
-        if (direction === 90) {
-            return speed;
+        if (turningDirection === 'left') {
+            return turningSpeed * -1;
         }
-        return 0;
+        return turningSpeed;
     }
 
     function capY(position) {
@@ -44,16 +46,18 @@ var renderEngine = (function (container) {
         return position;
     }
 
-    function calculateNewPosition(currentTankState, newDirection, newSpeed) {
+    function calculateNewState(currentTankState, newTankGameState) {
+        var newDirection = currentTankState.direction + getDirectionOffset(newTankGameState.turningDirection, newTankGameState.turningSpeed, newTankGameState.isTurning);
         return {
-            top: capY(currentTankState.top + getTopOffset(newDirection, newSpeed)),
-            left: capX(currentTankState.left + getLeftOffset(newDirection, newSpeed))
+            top: capY(currentTankState.top + getTopOffset(newDirection, newTankGameState.drivingSpeed)),
+            left: capX(currentTankState.left + getLeftOffset(newDirection, newTankGameState.drivingSpeed)),
+            direction: newDirection
         };
     }
 
     function renderEngine() {
-        var newPosition = calculateNewPosition(tank.state, gamestate.tanks[0].direction, gamestate.tanks[0].speed);
-        tank.setState({left: newPosition.left, top: newPosition.top, direction: gamestate.tanks[0].direction});
+        var newState = calculateNewState(tank.state, gamestate.tanks[0]);
+        tank.setState({left: newState.left, top: newState.top, direction: newState.direction});
     }
 
     return renderEngine;

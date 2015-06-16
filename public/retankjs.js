@@ -1,26 +1,47 @@
+var KEY_LEFT = 37;
+var KEY_RIGHT = 39;
+
 var gamestate = {
     name: 'tankular',
     tanks: [
         {
-            direction: 0,
-            speed: 2
+            isTurning: false,
+            turningDirection: '',
+            turningSpeed: 5,
+            drivingSpeed: 2
         }
     ],
     unicorns: []
 };
+
+function createTurningEvent(isTurning, turningDirection) {
+    return {
+        'eventType': 'turning',
+        'isTurning': isTurning,
+        'turningDirection': turningDirection
+    };
+}
 
 Rx.Observable
     .interval(100/6)
     .subscribe(renderEngine);
 
 Rx.Observable
+    .fromEvent(document, 'keydown')
+    .map(function (event) {
+        switch(event.which) {
+            case KEY_LEFT: return createTurningEvent(true, 'left');
+            case KEY_RIGHT: return createTurningEvent(true, 'right');
+        }
+    })
+    .subscribe(gameEngine);
+
+Rx.Observable
     .fromEvent(document, 'keyup')
-    .map(function (e) {
-        switch(e.which) {
-            case 38: return { event: 'directionchange', direction: 0 };
-            case 40: return { event: 'directionchange', direction: 180};
-            case 37: return { event: 'directionchange', direction: 270};
-            case 39: return { event: 'directionchange', direction: 90 };
+    .map(function (event) {
+        switch(event.which) {
+            case KEY_LEFT: return createTurningEvent(false, 'left');
+            case KEY_RIGHT: return createTurningEvent(false, 'right');
         }
     })
     .subscribe(gameEngine);

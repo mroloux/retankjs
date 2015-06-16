@@ -1,8 +1,9 @@
-var gameEngine = (function () {
+var gameEngine = (function() {
 
-    function gameEngine(e) {
-        if (e) {
-            gamestate.tanks[0].direction = e.direction;
+    function gameEngine(event) {
+        if (typeof event !== 'undefined' ) {
+            gamestate.tanks[0].isTurning = event.isTurning;
+            gamestate.tanks[0].turningDirection = event.turningDirection;
         }
     }
 
