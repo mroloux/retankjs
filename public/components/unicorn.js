@@ -17,7 +17,7 @@ var horsySound = new Audio("sound/horse.mp3");
 
 function createUnicorn(unicorn) {
     var div = document.createElement('div');
-    document.body.appendChild(div);
+    document.getElementById('battleground').appendChild(div);
     React.render(<Unicorn left={unicorn.x} top={unicorn.y} />, div);
     gamestate.unicorns.push(unicorn);
     horsySound.play();
