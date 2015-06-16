@@ -1,19 +1,11 @@
 var battlegroundState = {
     tanks: [
-        {
-            id: Date.now(),
-            isTurning: false,
-            turningDirection: '',
-            turningSpeed: 5,
-            drivingSpeed: 2,
-            left: 0,
-            top: 0,
-            direction: 0
-        }
+        new Tank()
     ],
     unicorns: [],
-    updateTank: function(updatedTank) {
-        var tankToUpdate = this.tanks.filter(function(tank) {
+    updateTank: function (updatedTank) {
+        updatedTank.boundingBox = Tank.prototype.boundingBox;
+        var tankToUpdate = this.tanks.filter(function (tank) {
             return tank.id === updatedTank.id;
         })[0];
         if (!tankToUpdate) {
@@ -25,8 +17,16 @@ var battlegroundState = {
             }
         }
     },
-    collides: function(object, top, left, width, height) {
-
+    collides: function (object, newBoundingBox) {
+        for (var i = 0; i < this.tanks.length; ++i) {
+            var currentTank = this.tanks[i];
+            if (currentTank != object) {
+                if (currentTank.boundingBox().getCollisionBox().intersectsWith(newBoundingBox.getCollisionBox())) {
+                    return currentTank;
+                }
+            }
+        }
+        return false;
     }
 };
 

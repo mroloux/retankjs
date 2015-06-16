@@ -52,15 +52,16 @@ var renderEngine = (function (container, network, battlegroundState) {
         var newTop = capY(tank.top + getTopOffset(newDirection, tank.drivingSpeed));
         var newLeft = capX(tank.left + getLeftOffset(newDirection, tank.drivingSpeed));
 
-        battlegroundState.collides(newTop, newLeft - 15, tankHeight, tankHeight);
-
-        tank.top = newTop;
-        tank.left = newLeft;
-        tank.direction = newDirection;
+        var collidingObject = battlegroundState.collides(tank, new BoundingBox(newLeft, newTop, tank.width, tank.height));
+        if (!collidingObject) {
+            tank.top = newTop;
+            tank.left = newLeft;
+            tank.direction = newDirection;
+        }
     }
 
     function renderEngine() {
-        for(var i = 0; i < battlegroundState.tanks.length; ++i) {
+        for (var i = 0; i < battlegroundState.tanks.length; ++i) {
             recalculateState(battlegroundState.tanks[i], battlegroundState);
         }
         battleground.setState(battlegroundState);
