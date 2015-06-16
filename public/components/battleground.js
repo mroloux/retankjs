@@ -11,6 +11,7 @@ var battlegroundState = {
             direction: 0
         }
     ],
+    unicorns: [],
     updateTank: function(updatedTank) {
         var tankToUpdate = this.tanks.filter(function(tank) {
             return tank.id === updatedTank.id;

@@ -7,7 +7,7 @@ network.onTankChange(function(tank) {
 
 network.onCreateUnicorn(function(unicorn) {
     document.getElementById('battleground').appendChild(createUnicorn(unicorn));
-    gamestate.unicorns.push(unicorn);
+    battlegroundState.unicorns.push(unicorn);
 });
 
 function createTurningEvent(isTurning, turningDirection) {
