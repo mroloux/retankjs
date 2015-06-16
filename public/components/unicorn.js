@@ -6,8 +6,7 @@ var UnicornComponent = React.createClass({
                 position: 'absolute',
                 top: this.props.state.top,
                 left: this.props.state.left,
-                width: '100px',
-                zIndex: -1
+                width: '100px'
             }} />
             );
     }
