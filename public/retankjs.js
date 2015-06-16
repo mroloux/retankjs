@@ -23,7 +23,12 @@ var gamestate = {};
 var keypress = Rx.Observable
     .fromEvent(document, 'keyup')
     .map(function (e) {
-        return { event: 'turnleft' };
+        switch(e.which) {
+            case 38: return { event: 'directionup' };
+            case 40: return { event: 'directiondown' };
+            case 37: return { event: 'directionleft' };
+            case 39: return { event: 'directionright' };
+        }
     });
 
 var handlers = {
@@ -46,7 +51,7 @@ var tankGame = React.render(
 );
 
 Rx.Observable
-    .interval(500)
+    .interval(100)
     .map(tick)
     .startWith(gamestate)
     .merge(keypress)
