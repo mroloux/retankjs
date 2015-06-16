@@ -6,23 +6,13 @@ var gamestate = {
             isTurning: false,
             turningDirection: '',
             turningSpeed: 5,
-            drivingSpeed: 2,
-            initialState: {
-                top: 0,
-                left: 0,
-                direction: 110
-            }
+            drivingSpeed: 2
         },
         {
             isTurning: false,
             turningDirection: '',
             turningSpeed: 5,
-            drivingSpeed: 2,
-            initialState: {
-                top: 500,
-                left: 750,
-                direction: 290
-            }
+            drivingSpeed: 2
         }
     ],
     unicorns: [],

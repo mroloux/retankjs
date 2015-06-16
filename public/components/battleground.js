@@ -6,9 +6,9 @@ var battlegroundState = {
             direction: 0
         },
         {
-            left: 0,
-            top: 0,
-            direction: 0
+            top: 500,
+            left: 750,
+            direction: 290
         }
     ]
 };
