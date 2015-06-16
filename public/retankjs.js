@@ -5,6 +5,11 @@ network.onTankChange(function(tank) {
     gamestate.updateTank(tank);
 });
 
+network.onCreateUnicorn(function(unicorn) {
+    document.getElementById('battleground').appendChild(createUnicorn(unicorn));
+    gamestate.unicorns.push(unicorn);
+})
+
 function createTurningEvent(isTurning, turningDirection) {
     return {
         'eventType': 'turning',

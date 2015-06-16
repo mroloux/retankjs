@@ -12,9 +12,23 @@
     <script type="text/jsx" src="components/unicorn.js"></script>
     <script type="text/jsx" src="components/tank.js"></script>
     <script type="text/jsx" src="retankjs.js"></script>
+    <style>
+        .battleground {
+            position: relative;
+            width: 950px;
+            height: 700px;
+            overflow: hidden;
+            border-style: solid;
+            margin: auto
+        }
+
+        .centered {
+            margin: auto;
+        }
+    </style>
 </head>
 <body>
-<div id="battleground" style="position: relative; width: 950px; height: 700px; overflow: hidden; border-style: solid; margin: auto">
+<div id="battleground" class="battleground centered">
     <div id="playerTank"></div>
     <div id="opponentTank"></div>
 </div>

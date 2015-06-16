@@ -1,13 +1,16 @@
 var network = (function () {
     var socket = io();
-    var listeners = [];
+    var updateTankListeners = [];
+    var createUnicornListeners = [];
 
     socket.on('unicornCreated', function (unicorn) {
-        createUnicorn(unicorn);
+        createUnicornListeners.forEach(function(listener) {
+            listener(tank);
+        });
     });
 
     socket.on('updatetank', function (tank) {
-        listeners.forEach(function(listener) {
+        updateTankListeners.forEach(function(listener) {
             listener(tank);
         });
     });
@@ -17,7 +20,10 @@ var network = (function () {
             socket.emit('updatetank', tank);
         },
         onTankChange: function(listener) {
-            listeners.push(listener);
+            updateTankListeners.push(listener);
+        },
+        onCreateUnicorn: function(listener) {
+            createUnicornListeners.push(listener);
         }
     }
 })();
