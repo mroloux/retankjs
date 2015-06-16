@@ -24,10 +24,10 @@ var keypress = Rx.Observable
     .fromEvent(document, 'keyup')
     .map(function (e) {
         switch(e.which) {
-            case 38: return { event: 'directionup' };
-            case 40: return { event: 'directiondown' };
-            case 37: return { event: 'directionleft' };
-            case 39: return { event: 'directionright' };
+            case 38: return { event: 'directionchange', data: { direction: 0} };
+            case 40: return { event: 'directionchange', data: { direction: 180 }};
+            case 37: return { event: 'directionchange', data: { direction: 270 }};
+            case 39: return { event: 'directionchange', data: { direction: 90  }};
         }
     });
 
@@ -40,7 +40,8 @@ var handlers = {
         return gs;
     },
 
-    _turnleft: function (gs) {
+    _directionchange: function (gs, event) {
+        console.log(event.direction);
         return gs;
     }
 };
