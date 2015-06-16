@@ -1,4 +1,4 @@
-var Tank = React.createClass({
+var TankComponent = React.createClass({
     render: function () {
         return (
             <img src="images/tank.png"

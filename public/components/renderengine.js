@@ -3,6 +3,7 @@ var renderEngine = (function (container, network, battlegroundState) {
     var maxX = container.offsetWidth;
     var maxY = container.offsetHeight;
     var tankWidth = 70;
+    var tankHeight = 100;
 
     function toRadians(angle) {
         return angle * (Math.PI / 180);
@@ -30,7 +31,7 @@ var renderEngine = (function (container, network, battlegroundState) {
         if (position > maxY) {
             return 0;
         }
-        if (position + tankWidth < 0) {
+        if (position + tankHeight < 0) {
             return maxY;
         }
         return position;
@@ -40,22 +41,27 @@ var renderEngine = (function (container, network, battlegroundState) {
         if (position > maxX) {
             return 0;
         }
-        if (position + tankWidth < 0) {
+        if (position + tankHeight < 0) {
             return maxX;
         }
         return position;
     }
 
-    function recalculateState(tank) {
+    function recalculateState(tank, battlegroundState) {
         var newDirection = tank.direction + getDirectionOffset(tank.turningDirection, tank.turningSpeed, tank.isTurning);
-        tank.top = capY(tank.top + getTopOffset(newDirection, tank.drivingSpeed));
-        tank.left = capX(tank.left + getLeftOffset(newDirection, tank.drivingSpeed));
+        var newTop = capY(tank.top + getTopOffset(newDirection, tank.drivingSpeed));
+        var newLeft = capX(tank.left + getLeftOffset(newDirection, tank.drivingSpeed));
+
+        battlegroundState.collides(newTop, newLeft - 15, tankHeight, tankHeight);
+
+        tank.top = newTop;
+        tank.left = newLeft;
         tank.direction = newDirection;
     }
 
     function renderEngine() {
         for(var i = 0; i < battlegroundState.tanks.length; ++i) {
-            recalculateState(battlegroundState.tanks[i]);
+            recalculateState(battlegroundState.tanks[i], battlegroundState);
         }
         battleground.setState(battlegroundState);
         network.tankChange(battlegroundState.tanks[0]);

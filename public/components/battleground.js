@@ -24,6 +24,9 @@ var battlegroundState = {
                 tankToUpdate[prop] = updatedTank[prop];
             }
         }
+    },
+    collides: function(object, top, left, width, height) {
+
     }
 };
 
@@ -35,7 +38,10 @@ var Battleground = React.createClass({
         return (
             <div>
             {this.state.tanks.map(function (state) {
-                return <Tank state={state} />
+                return <TankComponent state={state} />
+            })}
+            {this.state.unicorns.map(function (state) {
+                return <UnicornComponent state={state} />
             })}
             </div>
             );

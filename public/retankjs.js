@@ -6,8 +6,8 @@ network.onTankChange(function(tank) {
 });
 
 network.onCreateUnicorn(function(unicorn) {
-    document.getElementById('battleground').appendChild(createUnicorn(unicorn));
     battlegroundState.unicorns.push(unicorn);
+    horsySound.play();
 });
 
 function createTurningEvent(isTurning, turningDirection) {

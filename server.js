@@ -18,7 +18,7 @@ io.on('connection', function (socket) {
 
 function scheduleUnicorn() {
     setTimeout(function() {
-        io.sockets.emit('unicornCreated', { x: Math.random() * 950, y: Math.random() * 700});
+        io.sockets.emit('unicornCreated', { left: Math.random() * 950, top: Math.random() * 700});
         scheduleUnicorn();
     }, Math.random() * 20000);
 }
