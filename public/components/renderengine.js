@@ -5,7 +5,7 @@ var renderEngine = (function (container) {
     var tankWidth = 70;
 
     function toRadians(angle) {
-      return angle * (Math.PI / 180);
+        return angle * (Math.PI / 180);
     }
 
     function getTopOffset(directionDegrees, speed) {
@@ -56,11 +56,10 @@ var renderEngine = (function (container) {
     }
 
     function renderEngine() {
-        var newState = calculateNewState(tank.state, gamestate.tanks[0]);
-        tank.setState({left: newState.left, top: newState.top, direction: newState.direction});
-
-        var opponentNewState = calculateNewState(opponentTank.state, gamestate.tanks[1]);
-        opponentTank.setState({left: opponentNewState.left, top: opponentNewState.top, direction: opponentNewState.direction});
+        for(var i = 0; i < battlegroundState.tanks.length; ++i) {
+            battlegroundState.tanks[i] = calculateNewState(battlegroundState.tanks[i], gamestate.tanks[i]);
+        }
+        battleground.setState(battlegroundState);
     }
 
     return renderEngine;
