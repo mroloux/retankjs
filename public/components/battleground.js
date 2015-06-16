@@ -1,7 +1,9 @@
+var id = Date.now()
 var battlegroundState = {
     tanks: [
         {
-            id: Date.now(),
+            id: id,
+            name: 'Player' + id,
             isTurning: false,
             turningDirection: '',
             turningSpeed: 5,
@@ -48,7 +50,31 @@ var Battleground = React.createClass({
     }
 });
 
+var Player = React.createClass({
+    getInitialState: function () {
+        return battlegroundState.tanks[0];
+    },
+    handleChange: function(event) {
+        this.state.name = event.target.value;
+    },
+    render: function() {
+        var valueLink = {
+            value: this.state.name,
+            requestChange: this.handleChange
+        };
+        return <div class="playername">
+            <label for="playerName">Player name</label>
+            <input type="text" valueLink={valueLink} />
+        </div>;
+    }
+});
+
 var battleground = React.render(
     <Battleground />,
     document.getElementById('battleground')
+);
+
+var player = React.render(
+    <Player />,
+    document.getElementById('player')
 );

@@ -13,6 +13,10 @@
     <script type="text/jsx" src="components/unicorn.js"></script>
     <script type="text/jsx" src="retankjs.js"></script>
     <style>
+        html {
+            font-family: Helvetica Neue, Helvetica, Arial;
+        }
+
         .battleground {
             position: relative;
             width: 950px;
@@ -25,9 +29,26 @@
         .centered {
             margin: auto;
         }
+
+        .tank {
+            position: relative;
+        }
+
+        .tank-label {
+            position: absolute;
+            top: 10px;
+            margin:auto;
+            padding: 5px;
+            background-color: #555555;
+            border: 1px solid #000000;
+            border-radius: 5px;
+            color: #ffffff;
+            display: inline-block;
+        }
     </style>
 </head>
 <body>
-<div id="battleground" class="battleground centered"></div>
+<div id="player"></div>
+<div id="battleground" class="battleground centered" ></div>
 </body>
 </html>
