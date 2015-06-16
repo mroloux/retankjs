@@ -7,10 +7,13 @@ var io = require('socket.io')(http);
 app.use('/', express.static(path.join(__dirname, 'public')));
 
 io.on('connection', function (socket) {
-    socket
-        .on('disconnect', function () {
-            console.log("disconnect :-(");
-        });
+    socket.on('disconnect', function () {
+        console.log("disconnect :-(");
+    });
+
+    socket.on('updatetank', function (tank) {
+        io.sockets.broadcast.emit('updatetank', tank);
+    });
 });
 
 function scheduleUnicorn() {

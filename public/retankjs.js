@@ -5,14 +5,27 @@ var gamestate = {
     name: 'tankular',
     tanks: [
         {
+            id: Date.now(),
             isTurning: false,
             turningDirection: '',
             turningSpeed: 5,
             drivingSpeed: 2
         }
     ],
-    unicorns: []
+    unicorns: [],
+    updateTank: function(updatedTank) {
+        var tankToUpdate = this.tanks.filter(function(tank) {
+            return tank.id === updatedTank.id;
+        });
+
+        for (var prop in updatedTank) {
+            tankToUpdate[prop] = updatedTank[prop];
+        }
+    }
 };
+network.onTankChange(function(tank) {
+    gamestate.updateTank(tank);
+});
 
 function createTurningEvent(isTurning, turningDirection) {
     return {
