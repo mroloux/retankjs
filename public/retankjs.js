@@ -15,18 +15,19 @@ var Tank = React.createClass({
     }
 });
 
-var gamestate = {};
-
-var keypress = Rx.Observable
-    .fromEvent(document, 'keyup')
-    .map(function (e) {
-        switch(e.which) {
-            case 38: return { event: 'directionchange', data: { direction: 0} };
-            case 40: return { event: 'directionchange', data: { direction: 180 }};
-            case 37: return { event: 'directionchange', data: { direction: 270 }};
-            case 39: return { event: 'directionchange', data: { direction: 90  }};
+var gamestate = {
+    name: 'tankular',
+    tanks: [
+        {
+            direction: 0,
+            speed: 2
         }
-    });
+    ]
+};
+
+function keypressHandler(e) {
+    gamestate.tanks[0].direction = e.direction;
+}
 
 var tank = React.render(
     <Tank />,
@@ -48,10 +49,8 @@ Rx.Observable
             case 39: return { event: 'directionchange', direction: 90 };
         }
     })
-    .subscribe(function(e) {
-        console.log(e.data.direction);
-    });
+    .subscribe(keypressHandler);
 
 function render() {
-    tank.setState({left: Math.random() * 950, top: Math.random() * 700, direction: Math.random() * 360});
+    tank.setState({left: Math.random() * 950, top: Math.random() * 700, direction: gamestate.tanks[0].direction});
 }
