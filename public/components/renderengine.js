@@ -1,4 +1,4 @@
-var renderEngine = (function (container) {
+var renderEngine = (function (container, network, battlegroundState) {
 
     var maxX = container.offsetWidth;
     var maxY = container.offsetHeight;
@@ -46,22 +46,21 @@ var renderEngine = (function (container) {
         return position;
     }
 
-    function calculateNewState(currentTankState, newTankGameState) {
-        var newDirection = currentTankState.direction + getDirectionOffset(newTankGameState.turningDirection, newTankGameState.turningSpeed, newTankGameState.isTurning);
-        return {
-            top: capY(currentTankState.top + getTopOffset(newDirection, newTankGameState.drivingSpeed)),
-            left: capX(currentTankState.left + getLeftOffset(newDirection, newTankGameState.drivingSpeed)),
-            direction: newDirection
-        };
+    function recalculateState(tank) {
+        var newDirection = tank.direction + getDirectionOffset(tank.turningDirection, tank.turningSpeed, tank.isTurning);
+        tank.top = capY(tank.top + getTopOffset(newDirection, tank.drivingSpeed));
+        tank.left = capX(tank.left + getLeftOffset(newDirection, tank.drivingSpeed));
+        tank.direction = newDirection;
     }
 
     function renderEngine() {
         for(var i = 0; i < battlegroundState.tanks.length; ++i) {
-            battlegroundState.tanks[i] = calculateNewState(battlegroundState.tanks[i], gamestate.tanks[i]);
+            recalculateState(battlegroundState.tanks[i]);
         }
         battleground.setState(battlegroundState);
+        network.tankChange(battlegroundState.tanks[0]);
     }
 
     return renderEngine;
-})(document.getElementById('battleground'));
+})(document.getElementById('battleground'), network, battlegroundState);
 
