@@ -58,9 +58,15 @@ var renderEngine = (function (container, network, battlegroundState) {
     }
 
     function recalculateTankState(tank, battlegroundState) {
+        if (!tank.isDriving) {
+            console.log('Tank not driving: ' + tank.isDriving);
+        }
+
+        var drivingSpeed = tank.drivingDirection === 'backward' ? -1 * tank.drivingSpeed : tank.drivingSpeed;
+
         var newDirection = tank.direction + getDirectionOffset(tank.turningDirection, tank.turningSpeed, tank.isTurning);
-        var newTop = capY(tank.top + getTopOffset(newDirection, tank.drivingSpeed));
-        var newLeft = capX(tank.left + getLeftOffset(newDirection, tank.drivingSpeed));
+        var newTop = tank.isDriving ? capY(tank.top + getTopOffset(newDirection, drivingSpeed)) : tank.top;
+        var newLeft = tank.isDriving ? capX(tank.left + getLeftOffset(newDirection, drivingSpeed)) : tank.left;
 
         battlegroundState.collides(newTop, newLeft - 15, tankHeight, tankHeight);
 

@@ -1,6 +1,8 @@
 var KEY_SPACE = 32;
 var KEY_LEFT = 37;
+var KEY_UP = 38;
 var KEY_RIGHT = 39;
+var KEY_DOWN = 40;
 
 network.onTankChange(function(tank) {
     battlegroundState.updateTank(tank);
@@ -23,6 +25,14 @@ function createTurningEvent(isTurning, turningDirection) {
     };
 }
 
+function createDrivingEvent(isDriving, drivingDirection) {
+    return {
+        'eventType': 'driving',
+        'isDriving': isDriving,
+        'drivingDirection': drivingDirection
+    };
+}
+
 function createBulletEvent() {
     return {
         'eventType': 'bullet'
@@ -39,6 +49,8 @@ Rx.Observable
         switch(event.which) {
             case KEY_LEFT: return createTurningEvent(true, 'left');
             case KEY_RIGHT: return createTurningEvent(true, 'right');
+            case KEY_UP: return createDrivingEvent(true, 'forward');
+            case KEY_DOWN: return createDrivingEvent(true, 'backward');
             case KEY_SPACE: return createBulletEvent();
         }
     })
@@ -50,6 +62,8 @@ Rx.Observable
         switch(event.which) {
             case KEY_LEFT: return createTurningEvent(false, 'left');
             case KEY_RIGHT: return createTurningEvent(false, 'right');
+            case KEY_UP: return createDrivingEvent(false, 'forward');
+            case KEY_DOWN: return createDrivingEvent(false, 'backward');
         }
     })
     .subscribe(gameEngine);

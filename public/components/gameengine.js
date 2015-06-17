@@ -7,7 +7,9 @@ var gameEngine = (function (battlegroundState, network) {
             if (event.eventType === 'turning') {
                 myTank.isTurning = event.isTurning;
                 myTank.turningDirection = event.turningDirection;
-
+            } else if (event.eventType === 'driving' && !battlegroundState.options.cruiseControl) {
+                myTank.isDriving = event.isDriving;
+                myTank.drivingDirection = event.drivingDirection;
             } else if (event.eventType === 'bullet') {
                 var bullet = {
                     id: Date.now(),

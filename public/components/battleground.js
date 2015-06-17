@@ -1,10 +1,15 @@
 var id = Date.now()
 var battlegroundState = {
+    options: {
+        cruiseControl: true
+    },
     tanks: [
         {
             id: id,
             name: 'Player' + id,
             isTurning: false,
+            isDriving: true,
+            drivingDirection: 'forward',
             turningDirection: '',
             turningSpeed: 5,
             drivingSpeed: 2,
@@ -69,6 +74,29 @@ var Player = React.createClass({
     }
 });
 
+var CruiseControlCheckbox = React.createClass({
+  getInitialState: function() {
+    return { isChecked: battlegroundState.options.cruiseControl };
+  },
+  onChange: function() {
+    this.setState({isChecked: !this.state.isChecked});
+    battlegroundState.options.cruiseControl = !this.state.isChecked;
+    battlegroundState.tanks[0].isDriving = battlegroundState.options.cruiseControl;
+  },
+  render: function() {
+    return (
+      <label>
+        <input
+          type="checkbox"
+          checked={this.state.isChecked}
+          onChange={this.onChange}
+        />
+        Cruise control: {this.state.isChecked ? 'ON' : 'OFF'}
+      </label>
+    );
+  }
+});
+
 var battleground = React.render(
     <Battleground />,
     document.getElementById('battleground')
@@ -77,4 +105,9 @@ var battleground = React.render(
 var player = React.render(
     <Player />,
     document.getElementById('player')
+);
+
+var player = React.render(
+    <CruiseControlCheckbox />,
+    document.getElementById('cruiseControl')
 );
