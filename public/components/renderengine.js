@@ -86,7 +86,7 @@ var renderEngine = (function (container, network, battlegroundState) {
             }
         }
         // TODO nog niet alle kogels verdwijnen (als je er veel schiet)
-        console.log('#bullets: ' + battlegroundState.bullets.length);
+//        console.log('#bullets: ' + battlegroundState.bullets.length);
 
         battleground.setState(battlegroundState);
         network.tankChange(battlegroundState.tanks[0]);

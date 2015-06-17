@@ -17,6 +17,7 @@ var gameEngine = (function (battlegroundState) {
                     speed: 10
                 };
                 battlegroundState.bullets.push(bullet);
+                bulletSound.play();
             }
         }
     }

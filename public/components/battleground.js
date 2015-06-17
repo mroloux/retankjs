@@ -39,7 +39,7 @@ var Battleground = React.createClass({
     },
     render: function () {
         return (
-            <div>
+            <div className="battlegroundContainer">
             {this.state.tanks.map(function (state) {
                 return <TankComponent state={state} />
             })}

@@ -13,7 +13,6 @@ network.onCreateUnicorn(function(unicorn) {
 
 network.onBulletShot(function(bullet) {
     battlegroundState.bullets.push(bullet);
-    bulletSound.play();
 });
 
 function createTurningEvent(isTurning, turningDirection) {
