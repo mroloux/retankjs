@@ -3,6 +3,7 @@ var KEY_LEFT = 37;
 var KEY_UP = 38;
 var KEY_RIGHT = 39;
 var KEY_DOWN = 40;
+var KEY_C = 67;
 
 network.onTankChange(function(tank) {
     battlegroundState.updateTank(tank);
@@ -39,6 +40,12 @@ function createBulletEvent() {
     };
 }
 
+function createToggleCruiseControlEvent() {
+    return {
+        'eventType': 'toggleCruiseControl'
+    };
+}
+
 Rx.Observable
     .interval(100/6)
     .subscribe(renderEngine);
@@ -51,6 +58,7 @@ Rx.Observable
             case KEY_RIGHT: return createTurningEvent(true, 'right');
             case KEY_UP: return createDrivingEvent(true, 'forward');
             case KEY_DOWN: return createDrivingEvent(true, 'backward');
+            case KEY_C: return createToggleCruiseControlEvent();
             case KEY_SPACE: return createBulletEvent();
         }
     })

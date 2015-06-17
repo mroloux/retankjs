@@ -10,6 +10,8 @@ var gameEngine = (function (battlegroundState, network) {
             } else if (event.eventType === 'driving' && !battlegroundState.options.cruiseControl) {
                 myTank.isDriving = event.isDriving;
                 myTank.drivingDirection = event.drivingDirection;
+            } else if (event.eventType === 'toggleCruiseControl') {
+                cruiseControlCheckbox.onChange();
             } else if (event.eventType === 'bullet') {
                 var bullet = {
                     id: Date.now(),

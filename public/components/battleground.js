@@ -80,7 +80,7 @@ var CruiseControlCheckbox = React.createClass({
   },
   onChange: function() {
     this.setState({isChecked: !this.state.isChecked});
-    battlegroundState.options.cruiseControl = !this.state.isChecked;
+    battlegroundState.options.cruiseControl = !battlegroundState.options.cruiseControl;
     battlegroundState.tanks[0].isDriving = battlegroundState.options.cruiseControl;
   },
   render: function() {
@@ -107,7 +107,7 @@ var player = React.render(
     document.getElementById('player')
 );
 
-var player = React.render(
+var cruiseControlCheckbox = React.render(
     <CruiseControlCheckbox />,
     document.getElementById('cruiseControl')
 );
