@@ -1,4 +1,4 @@
-var gameEngine = (function (battlegroundState) {
+var gameEngine = (function (battlegroundState, network) {
 
     function gameEngine(event) {
         if (typeof(event) !== 'undefined') {
@@ -18,9 +18,10 @@ var gameEngine = (function (battlegroundState) {
                 };
                 battlegroundState.bullets.push(bullet);
                 bulletSound.play();
+                network.shootBullet(bullet);
             }
         }
     }
 
     return gameEngine;
-})(battlegroundState);
+})(battlegroundState, network);
