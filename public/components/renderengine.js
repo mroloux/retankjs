@@ -48,10 +48,10 @@ var renderEngine = (function (container, network, battlegroundState) {
     }
 
     function isOutsideGround(x, y) {
-        if (x > maxX) {
+        if (x < 0 || x > maxX) {
             return true;
         }
-        if (y > maxY) {
+        if (y < 0 || y > maxY) {
             return true;
         }
         return false;
@@ -79,14 +79,12 @@ var renderEngine = (function (container, network, battlegroundState) {
         for(var i = 0; i < battlegroundState.tanks.length; ++i) {
             recalculateTankState(battlegroundState.tanks[i], battlegroundState);
         }
-        for (var j = 0; j < battlegroundState.bullets.length; ++j) {
-            var isOutsideGround = recalculateBulletState(battlegroundState.bullets[j]);
+        for (var i = battlegroundState.bullets.length -1; i >= 0; i--) {
+            var isOutsideGround = recalculateBulletState(battlegroundState.bullets[i]);
             if (isOutsideGround) {
-                battlegroundState.bullets.splice(j, 1);
+                battlegroundState.bullets.splice(i, 1);
             }
         }
-        // TODO nog niet alle kogels verdwijnen (als je er veel schiet)
-//        console.log('#bullets: ' + battlegroundState.bullets.length);
 
         battleground.setState(battlegroundState);
         network.tankChange(battlegroundState.tanks[0]);
