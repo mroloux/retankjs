@@ -12,4 +12,4 @@ var BulletComponent = React.createClass({
     }
 });
 
-var bulletSound = new Audio("sound/horse.mp3");
+var bulletSound = new Audio("sound/44.wav");
