@@ -3,8 +3,8 @@ var TankComponent = React.createClass({
         return (
             <div className="tank"
                  style={{
-                    top: this.props.state.top,
-                    left: this.props.state.left,
+                    top: this.props.state.top - 50,
+                    left: this.props.state.left - 35,
                 }}>
                 <img src="images/tank.png"
                 style={{

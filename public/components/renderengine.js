@@ -2,8 +2,6 @@ var renderEngine = (function (container, network, battlegroundState) {
 
     var maxX = container.offsetWidth;
     var maxY = container.offsetHeight;
-    var tankWidth = 70;
-    var tankHeight = 100;
 
     function toRadians(angle) {
         return angle * (Math.PI / 180);
@@ -31,7 +29,7 @@ var renderEngine = (function (container, network, battlegroundState) {
         if (position > maxY) {
             return 0;
         }
-        if (position + tankHeight < 0) {
+        if (position + battlegroundState.objects.tank.height < 0) {
             return maxY;
         }
         return position;
@@ -41,7 +39,7 @@ var renderEngine = (function (container, network, battlegroundState) {
         if (position > maxX) {
             return 0;
         }
-        if (position + tankHeight < 0) {
+        if (position + battlegroundState.objects.tank.height < 0) {
             return maxX;
         }
         return position;
@@ -68,7 +66,7 @@ var renderEngine = (function (container, network, battlegroundState) {
         var newTop = tank.isDriving ? capY(tank.top + getTopOffset(newDirection, drivingSpeed)) : tank.top;
         var newLeft = tank.isDriving ? capX(tank.left + getLeftOffset(newDirection, drivingSpeed)) : tank.left;
 
-        battlegroundState.collides(newTop, newLeft - 15, tankHeight, tankHeight);
+        battlegroundState.collides(newTop, newLeft - 15, battlegroundState.objects.tank.height, battlegroundState.objects.tank.height);
 
         tank.top = newTop;
         tank.left = newLeft;

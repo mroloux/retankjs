@@ -1,5 +1,15 @@
 var id = Date.now()
 var battlegroundState = {
+    objects: {
+        tank: {
+            width: 70,
+            height: 100
+        },
+        bullet: {
+            width: 10,
+            height: 39
+        }
+    },
     options: {
         cruiseControl: true
     },
