@@ -4,8 +4,8 @@ var BulletComponent = React.createClass({
             <img src="images/bullet.png"
             style={{
                 position: 'absolute',
-                top: this.props.state.top - 20,
-                left: this.props.state.left - 5,
+                left: this.props.state.centerPnt.x - 5,
+                top: this.props.state.centerPnt.y - 20,
                 transform: 'rotate(' + this.props.state.direction + 'deg)'
             }} />
             );

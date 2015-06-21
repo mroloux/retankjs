@@ -5,11 +5,11 @@ var gameEngine = (function (battlegroundState, network) {
     }
 
     function calculateBarrelPositionOfTank(tank) {
-        var leftOffset = Math.sin(toRadians(tank.direction)) * (battlegroundState.objects.tank.height / 2);
-        var topOffset = -1 * Math.cos(toRadians(tank.direction)) * (battlegroundState.objects.tank.height / 2);
+        var xOffset = Math.sin(toRadians(tank.direction)) * (battlegroundState.objects.tank.height / 2);
+        var yOffset = -1 * Math.cos(toRadians(tank.direction)) * (battlegroundState.objects.tank.height / 2);
         return {
-            left: tank.left + leftOffset,
-            top: tank.top + topOffset
+            x: tank.centerPnt.x + xOffset,
+            y: tank.centerPnt.y + yOffset
         };
     }
 
@@ -17,8 +17,10 @@ var gameEngine = (function (battlegroundState, network) {
         var barrelPosition = calculateBarrelPositionOfTank(tank);
         return {
             id: Date.now(),
-            left: barrelPosition.left,
-            top: barrelPosition.top,
+            centerPnt: {
+                x: barrelPosition.x,
+                y: barrelPosition.y
+            },
             direction: tank.direction,
             speed: 10
         };

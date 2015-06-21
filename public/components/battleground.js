@@ -23,8 +23,10 @@ var battlegroundState = {
             turningDirection: '',
             turningSpeed: 5,
             drivingSpeed: 2,
-            left: 0,
-            top: 0,
+            centerPnt: {
+                x: 35,
+                y: 50
+            },
             direction: 0
         }
     ],
